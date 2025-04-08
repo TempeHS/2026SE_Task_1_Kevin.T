@@ -18,7 +18,6 @@ def main():
             case _:
                 continue
 
-################################################################### need to change this to use source.csv
 def login():
     # username part
     while True:
@@ -27,7 +26,6 @@ def login():
         with open("plain_text.txt", "r") as file:
             for line in enumerate(file):
                 if line[1].split(",")[0] == username:
-                    print("username found")
                     found = True
                     position = line[0]
                     break
@@ -46,14 +44,13 @@ def login():
         with open("plain_text.txt", "r") as file:            
             #black magic but somehow i got the password from the text file
             if line[1].split(",")[1].rstrip() == password:
-                print("correct password")
                 found = True
                 break
 
         if found:
             break
         else:
-            print("username not found")
+            print("wrong password")
 
 def logged_in():
     while True:
@@ -73,22 +70,31 @@ def logged_in():
 
 def register():
     while True:
-        done = False
+        taken = False
         username = input("Enter your username: ")
         with open("plain_text.txt", "r") as file:
             for line in file:
                 if line.split(",")[0].rstrip() == username:
                     print("Username already taken")
-            done = True
-
-        if found:
+                    taken = True
+                    continue
+            
+        if not taken:
             break
-        else:
-            print("username not found")
 
-    password = input("Enter your password: ")
+    # added it to the end
+    with open("plain_text.txt", "a") as file:
+        password = input("Enter your password: ")
+        file.write(f"\n{username},{password}")
 
 def change_password():
-    print("change password")
+    with open("plain_text.txt", "r") as file:
+        print("change password (not added)") # its here so it acutally runs
+        # pseudoing my code
+        # FOR line in file
+        #   if line.split(",")[0].rstrip() EQUALS username
+        #       line.replace(username) (⁉️)
+        
+        # uhh
 
 main()
